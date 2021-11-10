@@ -5,6 +5,7 @@ import express from "express"
 const ROUTER_PORT = process.env.ROUTER_PORT
 const app = express()
 
+
 import {routerLog, errorLog, debugLog, defaultLog} from './loggingConf.js'
 
 const mtaRoutes = [process.env.MTA_REAL, process.env.MTA_DOP, process.env.MTA_DEV]
