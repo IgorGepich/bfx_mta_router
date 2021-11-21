@@ -27,7 +27,7 @@ app.post('/', (req, res) => {
     })
         .on('end', function() {
             const data = Buffer.concat(chunks)
-            const reqBody = JSON.parse(data)
+            const reqBody = JSON.parse(data.toString())
             routerLog.info('Request_body: ', reqBody)
 
             switch (targetUrl){
