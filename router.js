@@ -15,15 +15,11 @@ app.post('/', (req, res) => {
 
     let chunks = []
     let url = req.headers.host
-    console.log(url)
     let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
-    console.log(fullUrl)
     routerLog.info('Full_url: ', fullUrl)
     const parts = fullUrl.split('/')
-    console.log(parts)
     routerLog.info('Parts_of_url: ', parts)
     let targetUrl = parts[2]
-    console.log(targetUrl)
     routerLog.info('Target_url: ', targetUrl)
     req.on('data', function(data) {
         chunks.push(data)
@@ -32,9 +28,7 @@ app.post('/', (req, res) => {
         .on('end', function() {
             const data = Buffer.concat(chunks)
             const reqBody = JSON.parse(data)
-            console.log(reqBody)
             routerLog.info('Request_body: ', reqBody)
-            // for (let i in chunks) {console.log(' ', chunks[i])}
 
             switch (targetUrl){
                 case 'localhost:3005':
