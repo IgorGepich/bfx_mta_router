@@ -51,7 +51,7 @@ function resendPostMethod(reqBody) {
                 'Content-Type': 'application/json',
             }
         })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(json => debugLog.info(json))
     }
 }
