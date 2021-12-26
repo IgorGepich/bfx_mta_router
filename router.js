@@ -5,22 +5,18 @@ import express from "express"
 const ROUTER_PORT = process.env.ROUTER_PORT
 const app = express()
 
+import {routerLog, debugLog} from './loggingConf.js'
 
-import {routerLog, errorLog, debugLog, defaultLog} from './loggingConf.js'
-
-const mtaRoutes = [process.env.MTA_REAL, process.env.MTA_DOP, process.env.MTA_DEV]
-
+const mtaRoutes = [process.env.MTA_DEV, process.env.MTA_REAL, process.env.MTA_DEV_COPY]
 
 app.post('/', (req, res) => {
 
     let chunks = []
-    let url = req.headers.host
+    //let url = req.headers.host
     let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
     routerLog.info('Full_url: ', fullUrl)
     const parts = fullUrl.split('/')
-    routerLog.info('Parts_of_url: ', parts)
     let targetUrl = parts[2]
-    routerLog.info('Target_url: ', targetUrl)
     req.on('data', function(data) {
         chunks.push(data)
 
@@ -57,7 +53,6 @@ function resendPostMethod(reqBody) {
         })
             .then(res => res.json())
             .then(json => debugLog.info(json))
-
     }
 }
 
